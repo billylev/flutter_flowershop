@@ -1,0 +1,17 @@
+{
+  "title": "The Flower Shop",
+  "what_like": "What would you like to do?",
+  "make_bouquet": "Make a Bouquet",
+  "buy_bouquet": "Buy a Bouquet",
+  "pick_flower": "Pick a flower",
+  "config_flower": "Refine Selection",
+  "quantity": "QUANTITY",
+  "size": "SIZE",
+  "color": "COLOR",
+  "add_to_cart": "Add To Cart",
+  "check_out": "Checkout",
+  "pieces": "pieces",
+  "size": "size",
+  "color": "color",
+  "shopping_cart": "Shopping Cart"
+}
