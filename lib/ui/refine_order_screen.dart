@@ -140,7 +140,6 @@ class RefineOrderScreen extends StatefulWidget {
 
 class RefineOrderScreenState extends State<RefineOrderScreen>
     with SingleTickerProviderStateMixin {
-
   final _formatCurrency = new NumberFormat.simpleCurrency();
 
   double _quantity = 0.0;
@@ -266,7 +265,6 @@ class RefineOrderScreenState extends State<RefineOrderScreen>
                 child: new Text(AppLocalizations.instance.text('add_to_cart') +
                     ' ${_formatCurrency.format(getCost())}'),
                 onPressed: () {
-
                   if (_quantity > 0.0) {
                     FlowerItem flowerItem = bloc.itemToRefine;
 
@@ -335,18 +333,18 @@ class RefineOrderScreenState extends State<RefineOrderScreen>
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: <Widget>[
                               _textTitle(item.name),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 8),
                               _quantityRow(),
                               _quantitySlider(theme, item.backgroundColor),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 8),
                               _textBody('size'),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 8),
                               FlowerSizePicker(
                                   value: _flowerSize,
                                   onChanged: _onChangedFlowerSize),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 8),
                               _textBody('color'),
-                              const SizedBox(height: 10),
+                              const SizedBox(height: 8),
                               FlowerColorPicker(
                                   value: _flowerColor,
                                   onChanged: _onChangedFlowerColor),

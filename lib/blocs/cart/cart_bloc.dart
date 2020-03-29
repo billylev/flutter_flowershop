@@ -3,42 +3,45 @@ import 'package:flutter_flowershop/models/item.dart';
 import 'package:rxdart/rxdart.dart';
 
 class CartBloc extends BlocBase {
-
   Set<CartItem> _itemsInCart = Set<CartItem>();
 
   // the order
-  BehaviorSubject<List<CartItem>> _orderController = BehaviorSubject<List<CartItem>>();
+  BehaviorSubject<List<CartItem>> _orderController =
+      BehaviorSubject<List<CartItem>>();
   Stream<List<CartItem>> get items => _orderController;
 
-  BehaviorSubject<int> _shoppingCartSizeController = BehaviorSubject<int>(seedValue: 0);
+  BehaviorSubject<int> _shoppingCartSizeController =
+      BehaviorSubject<int>.seeded(0);
   Stream<int> get shoppingCartSize => _shoppingCartSizeController;
 
-  BehaviorSubject<double> _shoppingCartPriceController = BehaviorSubject<double>(seedValue: 0.0);
+  BehaviorSubject<double> _shoppingCartPriceController =
+      BehaviorSubject<double>.seeded(0);
   Stream<double> get shoppingCartTotalPrice => _shoppingCartPriceController;
 
-  BehaviorSubject<List<CartItem>> _shoppingCartController = BehaviorSubject<List<CartItem>>(seedValue: <CartItem>[]);
+  BehaviorSubject<List<CartItem>> _shoppingCartController =
+      BehaviorSubject<List<CartItem>>.seeded(<CartItem>[]);
   Stream<List<CartItem>> get shoppingCart => _shoppingCartController;
 
-  void addToShoppingBasket(CartItem item){
+  void addToShoppingBasket(CartItem item) {
     _itemsInCart.add(item);
     _postActionOnBasket();
   }
 
-  void removeFromShoppingBasket(CartItem item){
+  void removeFromShoppingBasket(CartItem item) {
     _itemsInCart.remove(item);
     _postActionOnBasket();
   }
 
-  void _postActionOnBasket(){
+  void _postActionOnBasket() {
     _orderController.sink.add(_itemsInCart.toList());
     _shoppingCartSizeController.sink.add(_itemsInCart.length);
     _computeShoppingBasketTotalPrice();
   }
 
-  void _computeShoppingBasketTotalPrice(){
+  void _computeShoppingBasketTotalPrice() {
     double total = 0.0;
 
-    _itemsInCart.forEach((CartItem cartItem){
+    _itemsInCart.forEach((CartItem cartItem) {
       total += cartItem.item.price * cartItem.quantity;
     });
 
@@ -55,5 +58,6 @@ class CartBloc extends BlocBase {
     _orderController?.close();
     _shoppingCartSizeController?.close();
     _shoppingCartPriceController.close();
+    _shoppingCartController.close();
   }
 }

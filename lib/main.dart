@@ -11,6 +11,7 @@ import 'package:flutter_flowershop/ui/splash_screen.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   SystemChrome.setPreferredOrientations(
           [DeviceOrientation.portraitUp, DeviceOrientation.portraitDown])
       .then((_) => runApp(new MyApp()));
@@ -24,7 +25,6 @@ class MyApp extends StatefulWidget {
 }
 
 class MyAppState extends State<MyApp> {
-
   bool _showSplash = true;
 
   @override
@@ -34,7 +34,7 @@ class MyAppState extends State<MyApp> {
     // show the splash for 3 sec
     Future.delayed(Duration(seconds: 4), () {
       setState(() {
-        _showSplash =false;
+        _showSplash = false;
       });
     });
   }
@@ -43,7 +43,7 @@ class MyAppState extends State<MyApp> {
   Widget build(BuildContext context) {
     return BlocProvider<CartBloc>(
         bloc: CartBloc(),
-    child: MaterialApp(
+        child: MaterialApp(
             theme: ThemeData.light().copyWith(
               primaryColor: Colors.lightGreen,
             ),
@@ -66,13 +66,12 @@ class MyAppState extends State<MyApp> {
               }
               return supportedLocales.first;
             },
-        routes: {
-          PickFlowerScreen.route: (context) => PickFlowerScreen(),
-          MakeOrBuyScreen.route: (context) => MakeOrBuyScreen(),
-          RefineOrderScreen.route: (context) => RefineOrderScreen(),
-          ShoppingCartScreen.route: (context) => ShoppingCartScreen(),
-        },
-        home: _showSplash? SplashScreen() : MakeOrBuyScreen()
-    ));
+            routes: {
+              PickFlowerScreen.route: (context) => PickFlowerScreen(),
+              MakeOrBuyScreen.route: (context) => MakeOrBuyScreen(),
+              RefineOrderScreen.route: (context) => RefineOrderScreen(),
+              ShoppingCartScreen.route: (context) => ShoppingCartScreen(),
+            },
+            home: _showSplash ? SplashScreen() : MakeOrBuyScreen()));
   }
 }
